@@ -7,17 +7,20 @@ app.use(cors());
 
 const initializeServer = async () => {
   try {
-    app.listen(process.env.PORT || 3005, () => {
-      console.log(`Server is Running at http://localhost:3005`);
+    const port = process.env.PORT || 3001;
+    app.listen(port, () => {
+      console.log(`Server is Running at http://localhost:${port}`);
     });
   } catch (e) {
     console.log(`Db error '${e.message}'`);
     process.exit(1);
   }
 };
+
 initializeServer();
 
 app.get("/todo", (req, res) => {
   const msg = { text: "Integration is done" };
+  res.set("Access-Control-Allow-Origin", "*");
   res.send(msg);
 });

@@ -4,7 +4,14 @@ const App = () => {
   const [msg, setMsg] = useState("");
 
   const getData = async () => {
-    const res = await fetch("http://localhost:3005/todo");
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "Application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    };
+    const res = await fetch(`http://localhost:3001/todo`, options);
     const data = await res.json();
     setMsg(data.text);
   };
